@@ -34,3 +34,9 @@ function createGalleryItems() {
 
     galleryNew.append(...items);
 }
+
+// Points 3, 4
+const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+});
