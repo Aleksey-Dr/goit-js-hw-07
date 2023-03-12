@@ -41,8 +41,34 @@ function createGalleryItems() {
 
 gallery.addEventListener('click', getBigImage);
 
+let instanceRef;
+
 function getBigImage(event) {
-    const selectedImage = event.target.dataset.source;
-    // console.log(selectedImage);
+    event.preventDefault();
+    const instance =
+        basicLightbox.create(`<img width="1400" height="900" src="${event.target.dataset.source}">`,
+            {
+                onShow: showModal,
+                onClose: closeModal,
+            });
+    
+    instance.show();
+    // console.log(instance);
+    // console.log(event.target.dataset.source);
     // console.log(event.currentTarget);
+    instanceRef = instance;
+}
+
+function showModal() {
+        document.addEventListener('keydown', onEscPress);
+}
+
+function closeModal() {
+        document.removeEventListener('keydown', onEscPress);
+}
+    
+function onEscPress(event) {
+    if (event.key === 'Escape') {
+        instanceRef.close();
+    }
 }
